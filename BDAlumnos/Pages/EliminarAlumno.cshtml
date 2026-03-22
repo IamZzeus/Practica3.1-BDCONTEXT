@@ -1,0 +1,67 @@
+﻿@page "{id:int}"
+@model BDAlumnos.Pages.EliminarAlumnoModel
+@{
+    ViewData["Title"] = "Eliminar Alumno";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-danger text-white text-center py-3">
+                    <h4 class="mb-0"><i class="bi bi-exclamation-triangle-fill me-2"></i>Confirmar Eliminación</h4>
+                </div>
+                
+                <div class="card-body p-4 text-center">
+                    <div class="mb-4">
+                        <i class="bi bi-person-x-fill text-danger" style="font-size: 4rem;"></i>
+                        <h3 class="mt-3 fw-bold">¿Estás seguro?</h3>
+                        <p class="text-muted">Esta acción es irreversible. Se eliminará permanentemente la ficha del siguiente alumno:</p>
+                    </div>
+
+                    <div class="bg-light p-4 rounded-3 mb-4 border-start border-5 border-danger text-start shadow-sm">
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2">
+                                <strong class="text-dark"><i class="bi bi-person-badge me-2 text-danger"></i>Nombre:</strong>
+                                <span class="text-secondary">@Model.Alumno.Nombre</span>
+                            </li>
+                            <li class="mb-2">
+                                <strong class="text-dark"><i class="bi bi-book me-2 text-danger"></i>Carrera:</strong>
+                                <span class="text-secondary">@Model.Alumno.Carrera</span>
+                            </li>
+                            <li class="mb-2">
+                                <strong class="text-dark"><i class="bi bi-hash me-2 text-danger"></i>Semestre:</strong>
+                                <span class="text-secondary">@Model.Alumno.Semestre ° Semestre</span>
+                            </li>
+                            <li class="mb-2">
+                                <strong class="text-dark"><i class="bi bi-telephone me-2 text-danger"></i>Teléfono:</strong>
+                                <span class="text-secondary">@Model.Alumno.Telefono</span>
+                            </li>
+                            <li>
+                                <strong class="text-dark"><i class="bi bi-calendar-date me-2 text-danger"></i>Nacimiento:</strong>
+                                <span class="text-secondary">@Model.Alumno.FechaNacimiento.ToString("dd MMMM yyyy")</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <form method="post">
+                        <input type="hidden" asp-for="Alumno.Id" />
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger btn-lg shadow-sm fw-bold py-3">
+                                <i class="bi bi-trash3-fill me-2"></i>Sí, Eliminar de la Base de Datos
+                            </button>
+                            <a asp-page="/Consulta" class="btn btn-outline-secondary py-2">
+                                <i class="bi bi-arrow-left me-2"></i>No, Cancelar y Regresar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="text-center mt-3">
+                <p class="text-muted small">Referencia del sistema: Registro ID #@Model.Alumno.Id</p>
+            </div>
+        </div>
+    </div>
+</div>

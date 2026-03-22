@@ -1,0 +1,57 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Inicio - Gestión Escolar";
+}
+
+<div class="text-center my-5">
+    <h1 class="display-4 fw-bold text-primary">Sistema de Gestión de Alumnos</h1>
+    <p class="lead text-muted">Práctica de Conectividad con SQL Server y Entity Framework Core</p>
+    <hr class="w-25 mx-auto">
+</div>
+
+<div class="container">
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm border-0 bg-light">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold"><i class="bi bi-gear-fill me-2"></i>Resumen de la Práctica</h5>
+                    <p class="card-text">
+                        Esta aplicación web fue desarrollada utilizando el patrón de diseño <strong>Razor Pages</strong>,
+                        enfocándose en la implementación de un CRUD completo (Crear, Leer, Actualizar y Borrar).
+                    </p>
+                    <ul class="list-group list-group-flush bg-transparent">
+                        <li class="list-group-item bg-transparent">✅ Conexión a SQL Server vía ConnectionString.</li>
+                        <li class="list-group-item bg-transparent">✅ Migraciones de base de datos con EF Core.</li>
+                        <li class="list-group-item bg-transparent">✅ Inyección de dependencias para el DbContext.</li>
+                        <li class="list-group-item bg-transparent">✅ Validación de datos y Tag Helpers.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm border-0 border-start border-primary border-5">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Acciones Disponibles</h5>
+                    <p class="text-muted">Navega por las secciones del sistema para gestionar la información:</p>
+                    
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Consulta" class="btn btn-primary btn-lg text-start">
+                            <i class="bi bi-people-fill me-2"></i> Ver Lista de Alumnos
+                        </a>
+                        <a asp-page="/CrearAlumno" class="btn btn-outline-success btn-lg text-start">
+                            <i class="bi bi-person-plus-fill me-2"></i> Registrar Nuevo Alumno
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12 text-center text-secondary small">
+            <p>Estado de la Base de Datos: <span class="badge bg-success">Conectado a SQL Server (BDAlumnos)</span></p>
+        </div>
+    </div>
+</div>

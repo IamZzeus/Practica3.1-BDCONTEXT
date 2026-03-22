@@ -1,0 +1,94 @@
+﻿@page "{id:int}"
+@model BDAlumnos.Pages.EditarAlumnoModel
+@{
+    ViewData["Title"] = "Editar Información del Alumno";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-warning text-dark text-center py-3">
+                    <h4 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Actualizar Alumno</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post">
+                        <input type="hidden" asp-for="Alumno.Id" />
+
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label fw-bold text-secondary">
+                                    <i class="bi bi-person-fill me-1"></i>Nombre Completo
+                                </label>
+                                <input asp-for="Alumno.Nombre" class="form-control" />
+                                <span asp-validation-for="Alumno.Nombre" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-8 mb-3">
+                                <label class="form-label fw-bold text-secondary">
+                                    <i class="bi bi-briefcase-fill me-1"></i>Carrera
+                                </label>
+                                <input asp-for="Alumno.Carrera" class="form-control" />
+                                <span asp-validation-for="Alumno.Carrera" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold text-secondary">
+                                    <i class="bi bi-hash me-1"></i>Semestre
+                                </label>
+                                <input asp-for="Alumno.Semestre" class="form-control" type="number" />
+                                <span asp-validation-for="Alumno.Semestre" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold text-secondary">
+                                    <i class="bi bi-envelope-fill me-1"></i>Correo
+                                </label>
+                                <input asp-for="Alumno.Correo" class="form-control" type="email" />
+                                <span asp-validation-for="Alumno.Correo" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold text-secondary">
+                                    <i class="bi bi-telephone-fill me-1"></i>Teléfono
+                                </label>
+                                <input asp-for="Alumno.Telefono" class="form-control" type="tel" placeholder="10 dígitos" />
+                                <span asp-validation-for="Alumno.Telefono" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-secondary">
+                                <i class="bi bi-calendar-date-fill me-1"></i>Fecha de Nacimiento
+                            </label>
+                            <input asp-for="Alumno.FechaNacimiento" class="form-control" type="date" />
+                            <span asp-validation-for="Alumno.FechaNacimiento" class="text-danger small"></span>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning btn-lg shadow-sm fw-bold">
+                                <i class="bi bi-arrow-clockwise me-2"></i>Aplicar Cambios
+                            </button>
+                            <a asp-page="/Consulta" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle me-2"></i>Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <small class="text-muted">Editando el registro ID: #@Model.Alumno.Id</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,116 @@
+﻿@page
+@model BDAlumnos.Pages.ConsultaModel
+@{
+    ViewData["Title"] = "Consulta de Alumnos";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 class="text-dark fw-bold mb-1">
+                <i class="bi bi-people-fill text-primary"></i> Control de Alumnos
+            </h2>
+            <p class="text-muted mb-0">Listado completo de registros en la base de datos.</p>
+        </div>
+        <a asp-page="/CrearAlumno" class="btn btn-success px-4 shadow-sm fw-bold">
+            <i class="bi bi-plus-lg me-2"></i>Nuevo Registro
+        </a>
+    </div>
+
+    <div class="card shadow border-0 rounded-3">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th class="ps-4 py-3">ID</th>
+                            <th>Alumno y Contacto</th>
+                            <th>Carrera</th>
+                            <th class="text-center">Semestre</th>
+                            <th>F. Nacimiento</th> 
+                            <th class="text-center pe-4">Acciones Disponibles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var alumno in Model.ListaAlumnos)
+                        {
+                            <tr>
+                                <td class="ps-4 text-muted fw-bold">#@alumno.Id</td>
+                                <td>
+                                    <div class="fw-bold text-primary">@alumno.Nombre</div>
+                                    <div class="small text-muted">
+                                        <i class="bi bi-envelope-at me-1"></i>@alumno.Correo
+                                    </div>
+                                    <div class="small text-muted">
+                                        <i class="bi bi-telephone me-1"></i>@alumno.Telefono 
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-secondary-subtle text-secondary border px-3">
+                                        @alumno.Carrera
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="fw-bold text-dark">@alumno.Semestre °</span>
+                                </td>
+                                <td>
+                                    <div class="small">
+                                        <i class="bi bi-calendar-event me-1 text-primary"></i>
+                                        @alumno.FechaNacimiento.ToString("dd/MM/yyyy")
+                                    </div>
+                                </td>
+                                <td class="text-center pe-4">
+                                    <div class="d-flex justify-content-center gap-1 flex-wrap">
+                                        
+                                        <a asp-page="/VerInfo" asp-route-id="@alumno.Id" 
+                                           class="btn btn-info btn-sm d-inline-flex align-items-center text-white" title="Ver Perfil">
+                                            <i class="bi bi-eye-fill me-1"></i> Info
+                                        </a>
+
+                                        <a asp-page="/AlumnoDetalles" asp-route-id="@alumno.Id" 
+                                           class="btn btn-secondary btn-sm d-inline-flex align-items-center" title="Ver Materias">
+                                            <i class="bi bi-journal-text me-1"></i> Materias
+                                        </a>
+
+                                        <a asp-page="/EditarAlumno" asp-route-id="@alumno.Id" 
+                                           class="btn btn-primary btn-sm d-inline-flex align-items-center">
+                                            <i class="bi bi-pencil-fill me-1"></i> Editar
+                                        </a>
+
+                                        <a asp-page="/EliminarAlumno" asp-route-id="@alumno.Id" 
+                                           class="btn btn-danger btn-sm d-inline-flex align-items-center">
+                                            <i class="bi bi-trash3-fill me-1"></i> Borrar
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-sm { 
+        transition: all 0.2s; 
+        font-size: 0.75rem; /* Ajustamos un poco el tamaño para que quepan bien los 4 */
+        padding: 0.25rem 0.6rem;
+    }
+    .btn-sm:hover { 
+        transform: translateY(-2px); 
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    }
+    thead.bg-dark th { 
+        font-weight: 500; 
+        text-transform: uppercase; 
+        font-size: 0.85rem; 
+        letter-spacing: 1px; 
+    }
+    /* Estilo para que el botón info sea un azul más suave pero legible */
+    .btn-info {
+        background-color: #0dcaf0;
+        border-color: #0dcaf0;
+    }
+</style>
