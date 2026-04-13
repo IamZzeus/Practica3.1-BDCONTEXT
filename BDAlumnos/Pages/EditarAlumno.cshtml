@@ -6,17 +6,43 @@
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-7">
-            <div class="card shadow-lg border-0">
+        <div class="col-md-9">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
                 <div class="card-header bg-warning text-dark text-center py-3">
                     <h4 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Actualizar Alumno</h4>
+                    <div asp-validation-summary="All" class="text-danger"></div>
                 </div>
                 <div class="card-body p-4">
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <input type="hidden" asp-for="Alumno.Id" />
+                        <input type="hidden" asp-for="Alumno.FotoPath" /> <div class="row">
+                        <div class="col-md-4 text-center border-end">
+                            <label class="form-label fw-bold text-secondary d-block mb-3">
+                                <i class="bi bi-image me-1"></i>Fotografía
+                            </label>
+                                
+                            <div class="mb-3">
+                                @if (!string.IsNullOrEmpty(Model.Alumno.FotoPath))
+                                {
+                                    <img src="@Model.Alumno.FotoPath" id="preview" class="img-thumbnail rounded-circle shadow-sm"
+                                         style="width: 180px; height: 180px; object-fit: cover;" />
+                                }
+                                else
+                                {
+                                    <img src="/images/default-user.png" id="preview" class="img-thumbnail rounded-circle shadow-sm"
+                                         style="width: 180px; height: 180px; object-fit: cover;" />
+                                }
+                            </div>
 
-                        <div class="row">
-                            <div class="col-md-12 mb-3">
+                            <div class="mb-3">
+                                <input type="file" name="FotoSubida" id="fileInput" class="form-control form-control-sm"
+                                       accept="image/*" onchange="previewImage(event)" />
+                                <small class="text-muted d-block mt-2">Formatos: JPG, PNG. Máx 2MB</small>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 ps-md-4">
+                            <div class="mb-3">
                                 <label class="form-label fw-bold text-secondary">
                                     <i class="bi bi-person-fill me-1"></i>Nombre Completo
                                 </label>
@@ -24,71 +50,88 @@
                                 <span asp-validation-for="Alumno.Nombre" class="text-danger small"></span>
                             </div>
 
-                            <div class="col-md-8 mb-3">
-                                <label class="form-label fw-bold text-secondary">
-                                    <i class="bi bi-briefcase-fill me-1"></i>Carrera
-                                </label>
-                                <input asp-for="Alumno.Carrera" class="form-control" />
-                                <span asp-validation-for="Alumno.Carrera" class="text-danger small"></span>
+                            <div class="row">
+                                <div class="col-md-8 mb-3">
+                                    <label class="form-label fw-bold text-secondary">
+                                        <i class="bi bi-briefcase-fill me-1"></i>Carrera
+                                    </label>
+                                    <input asp-for="Alumno.Carrera" class="form-control" />
+                                    <span asp-validation-for="Alumno.Carrera" class="text-danger small"></span>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label fw-bold text-secondary">
+                                        <i class="bi bi-hash me-1"></i>Semestre
+                                    </label>
+                                    <input asp-for="Alumno.Semestre" class="form-control" type="number" />
+                                    <span asp-validation-for="Alumno.Semestre" class="text-danger small"></span>
+                                </div>
                             </div>
 
-                            <div class="col-md-4 mb-3">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">
+                                        <i class="bi bi-envelope-fill me-1"></i>Correo
+                                    </label>
+                                    <input asp-for="Alumno.Correo" class="form-control" type="email" />
+                                    <span asp-validation-for="Alumno.Correo" class="text-danger small"></span>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">
+                                        <i class="bi bi-telephone-fill me-1"></i>Teléfono
+                                    </label>
+                                    <input asp-for="Alumno.Telefono" class="form-control" type="tel" />
+                                    <span asp-validation-for="Alumno.Telefono" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
                                 <label class="form-label fw-bold text-secondary">
-                                    <i class="bi bi-hash me-1"></i>Semestre
+                                    <i class="bi bi-calendar-date-fill me-1"></i>Fecha de Nacimiento
                                 </label>
-                                <input asp-for="Alumno.Semestre" class="form-control" type="number" />
-                                <span asp-validation-for="Alumno.Semestre" class="text-danger small"></span>
+                                <input asp-for="Alumno.FechaNacimiento" class="form-control" type="date" />
+                                <span asp-validation-for="Alumno.FechaNacimiento" class="text-danger small"></span>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold text-secondary">
-                                    <i class="bi bi-envelope-fill me-1"></i>Correo
-                                </label>
-                                <input asp-for="Alumno.Correo" class="form-control" type="email" />
-                                <span asp-validation-for="Alumno.Correo" class="text-danger small"></span>
-                            </div>
+                    <hr class="my-4">
 
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold text-secondary">
-                                    <i class="bi bi-telephone-fill me-1"></i>Teléfono
-                                </label>
-                                <input asp-for="Alumno.Telefono" class="form-control" type="tel" placeholder="10 dígitos" />
-                                <span asp-validation-for="Alumno.Telefono" class="text-danger small"></span>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-bold text-secondary">
-                                <i class="bi bi-calendar-date-fill me-1"></i>Fecha de Nacimiento
-                            </label>
-                            <input asp-for="Alumno.FechaNacimiento" class="form-control" type="date" />
-                            <span asp-validation-for="Alumno.FechaNacimiento" class="text-danger small"></span>
-                        </div>
-
-                        <hr class="my-4">
-
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-warning btn-lg shadow-sm fw-bold">
-                                <i class="bi bi-arrow-clockwise me-2"></i>Aplicar Cambios
-                            </button>
-                            <a asp-page="/Consulta" class="btn btn-outline-secondary">
-                                <i class="bi bi-x-circle me-2"></i>Cancelar
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="text-center mt-3">
-                <small class="text-muted">Editando el registro ID: #@Model.Alumno.Id</small>
+                    <div class="d-flex justify-content-end gap-2">
+                        <a asp-page="/Consulta" class="btn btn-outline-secondary px-4 rounded-pill">
+                            <i class="bi bi-x-circle me-1"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-warning px-5 rounded-pill shadow-sm fw-bold text-dark">
+                            <i class="bi bi-save2-fill me-1"></i> Aplicar Cambios
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
+        <div class="text-center mt-3 text-muted">
+            <small>Editando el registro ID: #@Model.Alumno.Id</small>
+        </div>
     </div>
+</div>
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    
+    <script>
+        // Función para previsualizar la imagen antes de subirla
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('preview');
+                output.src = reader.result;
+            };
+            if(event.target.files[0]){
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+    </script>
 }

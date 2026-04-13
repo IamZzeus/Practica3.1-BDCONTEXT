@@ -1,0 +1,48 @@
+﻿@page
+@model BDAlumnos.Pages.CrearMateriaModel
+@{
+    ViewData["Title"] = "Nueva Materia";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h4 class="mb-0"><i class="bi bi-book-plus-fill me-2"></i>Nueva Asignatura</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post">
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold"><i class="bi bi-bookmark-star me-1"></i>Nombre de la Materia</label>
+                            <input asp-for="Materia.Nombre" class="form-control" placeholder="Ej. Estructura de Datos" />
+                            <span asp-validation-for="Materia.Nombre" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold"><i class="bi bi-award me-1"></i>Créditos Académicos</label>
+                            <input asp-for="Materia.Creditos" class="form-control" type="number" min="1" max="10" placeholder="Ej. 5" />
+                            <span asp-validation-for="Materia.Creditos" class="text-danger small"></span>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm fw-bold">
+                                <i class="bi bi-save-fill me-2"></i>Guardar Materia
+                            </button>
+                            <a asp-page="/Materias" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Cancelar y Volver
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

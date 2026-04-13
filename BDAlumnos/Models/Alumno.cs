@@ -10,5 +10,6 @@
         public string Telefono { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public List<AlumnoMateria> AlumnosMaterias { get; set; }
+        public string? FotoPath { get; set; }
     }
 }

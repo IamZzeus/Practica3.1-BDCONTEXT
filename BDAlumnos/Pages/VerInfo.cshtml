@@ -8,12 +8,24 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
-                <div class="card-header bg-primary py-4 text-center text-white">
-                    <div class="mb-2">
-                        <i class="bi bi-person-circle display-1"></i>
+                <div class="card-header bg-primary py-4 text-center text-white position-relative">
+                    <div class="mb-3">
+                        @if (!string.IsNullOrEmpty(Model.AlumnoSeleccionado?.FotoPath))
+                        {
+                            <img src="@Model.AlumnoSeleccionado.FotoPath"
+                                 class="rounded-circle shadow border border-4 border-white"
+                                 style="width: 150px; height: 150px; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <div class="bg-white text-primary rounded-circle d-inline-flex align-items-center justify-content-center shadow"
+                                 style="width: 150px; height: 150px;">
+                                <i class="bi bi-person-fill display-1"></i>
+                            </div>
+                        }
                     </div>
-                    <h2 class="fw-bold mb-0">Información del Alumno</h2>
-                    <p class="opacity-75">Expediente Académico Digital</p>
+                    <h2 class="fw-bold mb-0">@Model.AlumnoSeleccionado?.Nombre</h2>
+                    <p class="opacity-75 mb-0">Expediente Académico Digital</p>
                 </div>
 
                 <div class="card-body p-4">
@@ -32,7 +44,7 @@
                                     <i class="bi bi-person-lines-fill me-2"></i>Datos Personales
                                 </h5>
                                 <p class="mb-1 text-muted small text-uppercase fw-bold">Nombre Completo</p>
-                                <p class="fs-5 fw-semibold mb-3">@Model.AlumnoSeleccionado.Nombre</p>
+                                <p class="fs-5 fw-semibold mb-3 text-dark">@Model.AlumnoSeleccionado.Nombre</p>
 
                                 <p class="mb-1 text-muted small text-uppercase fw-bold">Correo Electrónico</p>
                                 <p class="mb-3"><i class="bi bi-envelope me-2 text-primary"></i>@Model.AlumnoSeleccionado.Correo</p>
@@ -52,19 +64,22 @@
                                 <p class="fs-5 mb-3">@Model.AlumnoSeleccionado.Semestre ° Semestre</p>
 
                                 <p class="mb-1 text-muted small text-uppercase fw-bold">Fecha de Nacimiento</p>
-                                <p class="mb-0"><i class="bi bi-calendar3 me-2 text-primary"></i>@Model.AlumnoSeleccionado.FechaNacimiento.ToLongDateString()</p>
+                                <p class="mb-0"><i class="bi bi-calendar3 me-2 text-primary"></i>@Model.AlumnoSeleccionado.FechaNacimiento.ToString("dd 'de' MMMM 'de' yyyy")</p>
                             </div>
                         </div>
 
                         <hr class="my-4">
 
-                        <div class="d-flex justify-content-between">
-                            <a asp-page="/Consulta" class="btn btn-outline-secondary px-4">
-                                <i class="bi bi-arrow-left me-2"></i>Volver a la Lista
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a asp-page="/Consulta" class="btn btn-outline-secondary px-4 rounded-pill">
+                                <i class="bi bi-arrow-left me-2"></i>Volver
                             </a>
                             <div class="gap-2 d-flex">
-                                <a asp-page="/EditarAlumno" asp-route-id="@Model.AlumnoSeleccionado.Id" class="btn btn-warning px-4">
-                                    <i class="bi bi-pencil-square me-2"></i>Editar Datos
+                                <a asp-page="/AlumnoDetalles" asp-route-id="@Model.AlumnoSeleccionado.Id" class="btn btn-info text-white px-4 rounded-pill">
+                                    <i class="bi bi-journal-text me-2"></i>Ver Materias
+                                </a>
+                                <a asp-page="/EditarAlumno" asp-route-id="@Model.AlumnoSeleccionado.Id" class="btn btn-warning px-4 rounded-pill fw-bold">
+                                    <i class="bi bi-pencil-square me-2"></i>Editar Perfil
                                 </a>
                             </div>
                         </div>
